@@ -14,5 +14,6 @@ and the active position is a release. Or it's just my personal preference.
 
 Inspired by:
 https://github.com/ktemkin/software-vim-clutch
+
 Which was inspired by:
 https://github.com/alevchuk/vim-clutch#readme
