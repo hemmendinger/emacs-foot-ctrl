@@ -5,6 +5,9 @@ import evdev
 import signal
 import logging, time
 
+## notes
+# looks like handlers have unused parameters
+
 #hack to keep asyncore from hogging 100% cpu
 #time.sleep(TIME_SLEEP) added to asyncore loop
 #0.02 keeps it consistently below 1
@@ -22,8 +25,10 @@ def press_handler(output_device, input_device, event):
         Pedal-press handler.
         This function is called whenever the VIM clutch-pedal is pushed.
     """
-    send_keypress(output_device, 'KEY_ESC')
-    send_keypress(output_device, 'KEY_I')
+#    send_keypress(output_device, 'KEY_ESC')
+#    send_keypress(output_device, 'KEY_I')
+#    send_keypress(output_device, 'KEY_CAPSLOCK')
+    send_keyrelease(output_device, 'KEY_I')
 
 
 def release_handler(output_device, input_device, event):
@@ -31,8 +36,8 @@ def release_handler(output_device, input_device, event):
         Pedal-release handler.
         This function is called whenever the VIM clutch-pedal is released.
     """
-    send_keypress(output_device, 'KEY_ESC')
-
+    #send_keypress(output_device, 'KEY_CAPSLOCK')
+    send_keypress(output_device, 'KEY_I')
 
 #
 # Core code starts here; modify the text below only if you know what you're doing!
@@ -69,17 +74,19 @@ class ClutchEventDispatcher(asyncore.file_dispatcher):
         return self.device.read()
 
 
-    def handle_read(self):
+    def handle_read_old(self):
         """
             Event handler for a foot-pedal event.
         """
 
         #Handle each of the received events, in the order that they were received.
         for event in self.recv():
+            print(event)
             if event.type == evdev.ecodes.EV_KEY:
-
+                # default event.type = 1
                 #Wrap the event in the appropriate class...
                 event = evdev.categorize(event)
+                print(event)
 
                 #If the clutch has been depressed, call the press handler.
                 if event.keystate == event.key_down:
@@ -89,6 +96,27 @@ class ClutchEventDispatcher(asyncore.file_dispatcher):
                 elif event.keystate == event.key_up:
                     self.release_handler(self.device, event)
 
+
+    def handle_read(self):
+        """
+            Event handler for a foot-pedal event.
+        """
+        #Handle each of the received events, in the order that they were received.
+        for event in self.recv():
+            print(event)
+            if event.type == evdev.ecodes.EV_KEY:
+                # default event.type = 1
+                #Wrap the event in the appropriate class...
+                event = evdev.categorize(event)
+
+
+                #If the clutch has been depressed, call the press handler.
+                if event.keystate == event.key_down:
+                    self.press_handler(self.device, event)
+
+                #Otherwise, call the release handler.
+                elif event.keystate == event.key_up:
+                    self.release_handler(self.device, event)
 
 
 
@@ -151,12 +179,19 @@ def send_keypress(output_device, keycode):
 
     #Send a key-down event, followed by a key-up event.
     output_device.write(evdev.ecodes.EV_KEY, evdev.ecodes.ecodes[keycode], 1)
-    output_device.write(evdev.ecodes.EV_KEY, evdev.ecodes.ecodes[keycode], 0)
+#    output_device.write(evdev.ecodes.EV_KEY, evdev.ecodes.ecodes[keycode], 0)
 
     #And send a synchronization signal
     output_device.syn()
 
-
+def send_keyrelease(output_device, keycode):
+    """
+       Send on key release, when the pedal is in a released/neutral position
+    """
+    # send key-up
+    output_device.write(evdev.ecodes.EV_KEY, evdev.ecodes.ecodes[keycode], 0)
+    #And send a synchronization signal
+    output_device.syn()
 
 def cleanup(output_device, input_devices):
     """
