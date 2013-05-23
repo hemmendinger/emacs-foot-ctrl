@@ -27,8 +27,10 @@ def press_handler(output_device, input_device, event):
     """
 #    send_keypress(output_device, 'KEY_ESC')
 #    send_keypress(output_device, 'KEY_I')
-#    send_keypress(output_device, 'KEY_CAPSLOCK')
-    send_keyrelease(output_device, 'KEY_I')
+
+#    send_keyrelease(output_device, 'KEY_I')
+    send_keyrelease(output_device, 'KEY_CAPSLOCK')
+
 
 
 def release_handler(output_device, input_device, event):
@@ -36,8 +38,9 @@ def release_handler(output_device, input_device, event):
         Pedal-release handler.
         This function is called whenever the VIM clutch-pedal is released.
     """
-    #send_keypress(output_device, 'KEY_CAPSLOCK')
-    send_keypress(output_device, 'KEY_I')
+    #send_keypress(output_device, 'KEY_I')
+    send_keypress(output_device, 'KEY_CAPSLOCK')
+
 
 #
 # Core code starts here; modify the text below only if you know what you're doing!
