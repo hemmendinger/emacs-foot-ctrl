@@ -7,7 +7,7 @@ import logging, time
 
 #hack to keep asyncore from hogging 100% cpu
 #time.sleep(TIME_SLEEP) added to asyncore loop
-#0.02 keeps it consistently below 1%
+#0.02 keeps it consistently below 1
 TIME_SLEEP = 0.02
 
 #Stores the product names for each device which can be used as a vim-clutch.
@@ -122,9 +122,8 @@ def main():
     #And loop indefinitely, handling "asynchronous" press events.
     try:
         while True:
-#            print('firing asyncore')
             time.sleep(TIME_SLEEP)
-            asyncore.loop()
+            asyncore.loop(count=1)
 
     #Allow the program to be closed by CTRL+C.
     except KeyboardInterrupt:
