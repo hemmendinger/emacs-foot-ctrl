@@ -3,6 +3,12 @@
 import asyncore
 import evdev
 import signal
+import logging, time
+
+#hack to keep asyncore from hogging 100% cpu
+#time.sleep(TIME_SLEEP) added to asyncore loop
+#0.02 keeps it consistently below 1%
+TIME_SLEEP = 0.02
 
 #Stores the product names for each device which can be used as a vim-clutch.
 COMPATIBLE_NAMES = ["RDing FootSwitchV1.1"]
@@ -115,11 +121,15 @@ def main():
 
     #And loop indefinitely, handling "asynchronous" press events.
     try:
-        asyncore.loop()
+        while True:
+#            print('firing asyncore')
+            time.sleep(TIME_SLEEP)
+            asyncore.loop()
 
     #Allow the program to be closed by CTRL+C.
     except KeyboardInterrupt:
         cleanup(output_device, input_devices)
+        print('\ncleanup on CTRL-C complete')
 
 
 def compatible_devices():
