@@ -11,6 +11,7 @@ going to be pushing CTRL.
 So it is likely best if the neutral position was when the pedal is pressed,
 and the active position is a release. Or it's just my personal preference.
 
+(Only tested on Ubuntu. Let me know if it needs adjustments for another flavor.)
 
 Inspired by:
 https://github.com/ktemkin/software-vim-clutch
