@@ -84,12 +84,12 @@ class ClutchEventDispatcher(asyncore.file_dispatcher):
 
         #Handle each of the received events, in the order that they were received.
         for event in self.recv():
-            print(event)
+#            print(event)
             if event.type == evdev.ecodes.EV_KEY:
                 # default event.type = 1
                 #Wrap the event in the appropriate class...
                 event = evdev.categorize(event)
-                print(event)
+#                print(event)
 
                 #If the clutch has been depressed, call the press handler.
                 if event.keystate == event.key_down:
@@ -106,7 +106,7 @@ class ClutchEventDispatcher(asyncore.file_dispatcher):
         """
         #Handle each of the received events, in the order that they were received.
         for event in self.recv():
-            print(event)
+#            print(event)
             if event.type == evdev.ecodes.EV_KEY:
                 # default event.type = 1
                 #Wrap the event in the appropriate class...
