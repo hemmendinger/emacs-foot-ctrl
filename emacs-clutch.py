@@ -143,6 +143,12 @@ def main():
     release_callback = lambda input_device, event : release_handler(output_device, input_device, event)
 
     #For each foot-pedal detected.
+    #TODO: review if it matters that it is looking for more than one device to
+    #      grab, when [usually] we will only want to use 1 pedal;
+    #      and if we have more than one pedal, we may not want that pedal
+    #      to be grabbed by this program; should warn user at least if
+    #      more than one device and ask to proceed and recommend unplugging
+    #      any unused device that shouldn't be grabbed
     for device in input_devices:
 
         #Attain sole ownership of the device, so its events don't populate back up to X.
