@@ -1,16 +1,21 @@
+import usb.core, usb.util
+import sys
 from evdev import InputDevice, categorize, ecodes, list_devices
 
 def list_all():
-    '''list all input devices available'''
+    '''evdev: list all input devices available'''
     devices = map(InputDevice, list_devices())
     for dev in devices:
         print( '%-20s %-32s %s' % (dev.fn, dev.name, dev.phys) )
 
 def live_monitor(eventdev):
-    '''monitor all keypresses from device live'''
+    '''evdev: monitor all keypresses from device live'''
     dev = InputDevice('/dev/input/' + eventdev)
     print(dev)
     for event in dev.read_loop():
         if event.type == ecodes.EV_KEY:
             print(categorize(event))
 
+def pyusb_find_all():
+    for dev in usb.core.find(find_all=True):
+        print(device)
