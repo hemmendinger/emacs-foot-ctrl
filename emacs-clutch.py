@@ -5,10 +5,6 @@ import evdev
 import signal
 import logging, time
 
-import guppy
-from guppy.heapy import Remote
-Remote.on()
-
 ## notes
 # looks like handlers have unused parameters
 
