@@ -49,7 +49,7 @@ def release_handler(output_device, input_device, event):
 class ClutchEventDispatcher(asyncore.file_dispatcher):
     """
         Special event handler designed to process asynchronous input
-        from a vim-clutch footpedal.
+        from a emacs-clutch footpedal.
     """
 
     def __init__(self, device, press_handler, release_handler):
@@ -129,7 +129,7 @@ def main():
     """
 
     #Create a virtual keyboard device, which will be used to _send_ the resultant key-presses.
-    output_device = evdev.UInput(events=None, name='Vim-Clutch Foot-Pedal')
+    output_device = evdev.UInput(events=None, name='Emacs-Clutch Foot-Pedal')
 
     #And get a list of all foot-pedal devices which should be monitored for events.
     input_devices = compatible_devices()
