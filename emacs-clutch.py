@@ -13,7 +13,7 @@ import logging, time
 #0.02 keeps it consistently below 1
 TIME_SLEEP = 0.02
 
-#Stores the product names for each device which can be used as a emacs-clutch.
+#Stores the product names for each device which can be used as a emacs-clutch. 
 COMPATIBLE_NAMES = ["RDing FootSwitchV1.1"]
 
 #
@@ -23,7 +23,7 @@ COMPATIBLE_NAMES = ["RDing FootSwitchV1.1"]
 def press_handler(output_device, input_device, event):
     """
         Pedal-press handler.
-        This function is called whenever the VIM clutch-pedal is pushed.
+        This function is called whenever the clutch-pedal is pushed.
     """
 #    send_keypress(output_device, 'KEY_ESC')
 #    send_keypress(output_device, 'KEY_I')
@@ -36,7 +36,7 @@ def press_handler(output_device, input_device, event):
 def release_handler(output_device, input_device, event):
     """
         Pedal-release handler.
-        This function is called whenever the VIM clutch-pedal is released.
+        This function is called whenever the clutch-pedal is released.
     """
     #send_keypress(output_device, 'KEY_I')
     send_keypress(output_device, 'KEY_CAPSLOCK')
