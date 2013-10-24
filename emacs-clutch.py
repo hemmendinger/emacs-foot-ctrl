@@ -13,7 +13,7 @@ import logging, time
 #0.02 keeps it consistently below 1
 TIME_SLEEP = 0.02
 
-#Stores the product names for each device which can be used as a vim-clutch.
+#Stores the product names for each device which can be used as a emacs-clutch.
 COMPATIBLE_NAMES = ["RDing FootSwitchV1.1"]
 
 #
