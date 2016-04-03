@@ -11,7 +11,10 @@ going to be pushing CTRL.
 So it is likely best if the neutral position was when the pedal is pressed,
 and the active position is a release. Or it's just my personal preference.
 
-(Only tested on Ubuntu. Let me know if it needs adjustments for another flavor.)
+I've found the quality of this food pedal is not very satisfying for long periods of use, and works better attached to a board or another surface to keep it anchored.
+
+
+## Credits
 
 Borrowing from and inspired by:
 https://github.com/ktemkin/software-vim-clutch
@@ -19,7 +22,9 @@ https://github.com/ktemkin/software-vim-clutch
 Which was inspired by:
 https://github.com/alevchuk/vim-clutch#readme
 
+
 ## How to Setup
+
 1. Connect foot switch
 
 2. Configure the foot switch to use one of the following:
@@ -29,4 +34,21 @@ https://github.com/alevchuk/vim-clutch#readme
 
 4. Run the emacs-clutch.py with permissions to access the hardware
 
-Ctrl-C to terminate the program
+Terminate the program:
+
+  Ctrl-C
+
+
+## Hardware Setup: hardware_device_tests.py
+
+Some might find this extra file helpful for configuring or testing to see if
+a pedal is correctly configured.
+
+
+## Support and Dependencies
+
+This was only tested on Ubuntu Linux. Let me know if it needs adjustments for another flavor.
+
+Requires:
+Python2
+evdev
